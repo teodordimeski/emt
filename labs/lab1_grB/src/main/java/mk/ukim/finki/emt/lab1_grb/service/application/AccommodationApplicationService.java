@@ -16,4 +16,6 @@ public interface AccommodationApplicationService {
     Optional<DisplayAccommodationDto> update(Long id, CreateAccommodationDto craateAccomodationDto);
 
     Optional<DisplayAccommodationDto> deleteById(Long id);
+
+    Optional<DisplayAccommodationDto> markAsRented(Long id);
 }

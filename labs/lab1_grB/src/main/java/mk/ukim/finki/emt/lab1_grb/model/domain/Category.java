@@ -2,7 +2,7 @@ package mk.ukim.finki.emt.lab1_grb.model.domain;
 
 public enum Category{
         ROOM,
-        OUSE,
+        HOUSE,
         FLAT,
         APARTMENT,
         HOTEL,

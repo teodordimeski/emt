@@ -1,27 +1,32 @@
 package mk.ukim.finki.emt.lab1_grb.model.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Entity
 @Table(name = "hosts")
 public class Host extends BaseAuditableEntity {
-    //    BaseAuditableEntity dava id crated updated
+    // BaseAuditableEntity dava id, createdAt, updatedAt
     @Column(nullable = false)
-    String name;
+    private String name;
 
     @Column(nullable = false)
-    String surname;
+    private String surname;
 
     @ManyToOne
-    @JoinColumn( name = "country_id")
-    Country country;
+    @JoinColumn(name = "country_id")
+    private Country country;
 
+    public Host(String name, String surname, Country country) {
+        this.name = name;
+        this.surname = surname;
+        this.country = country;
+    }
 }

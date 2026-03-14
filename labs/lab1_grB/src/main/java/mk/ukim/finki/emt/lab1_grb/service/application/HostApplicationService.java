@@ -1,8 +1,6 @@
 package mk.ukim.finki.emt.lab1_grb.service.application;
 
-import mk.ukim.finki.emt.lab1_grb.model.dto.CreateAccommodationDto;
 import mk.ukim.finki.emt.lab1_grb.model.dto.CreateHostDto;
-import mk.ukim.finki.emt.lab1_grb.model.dto.DisplayAccommodationDto;
 import mk.ukim.finki.emt.lab1_grb.model.dto.DisplayHostDto;
 
 import java.util.List;

@@ -1,28 +1,53 @@
 package mk.ukim.finki.emt.lab1_grb.model.domain;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Entity
 @Table(name = "accommodations")
 public class Accommodation extends BaseAuditableEntity{
 
-    //so BaseAuditableEntity imame id crated at i updated at
+    // so BaseAuditableEntity imame id, createdAt i updatedAt
     @Column(nullable = false)
-    String name;
+    private String name;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    Category category;
+    private Category category;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private State state;
 
     @ManyToOne
     @JoinColumn(name = "host_id")
-    Host host;
+    private Host host;
 
     @Column(nullable = false)
-    int Rooms;
+    private int rooms;
+
+    @Column(nullable = false)
+    private boolean rented = false;
+
+
+    public Accommodation(String name, Category category, Host host, int rooms, boolean rented, State state) {
+        this.name = name;
+        this.category = category;
+        this.host = host;
+        this.rooms = rooms;
+        this.rented = rented;
+        this.state = state;
+    }
+    
+
+
 }

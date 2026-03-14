@@ -49,4 +49,12 @@ public class AccommodationServiceImpl implements AccommodationService {
 
         return accommodation;
     }
+
+    @Override
+    public Optional<Accommodation> markAsRented(Long id) {
+        return accommodationRepository.findById(id).map(a -> {
+            a.setRented(true);
+            return accommodationRepository.save(a);
+        });
+    }
 }
