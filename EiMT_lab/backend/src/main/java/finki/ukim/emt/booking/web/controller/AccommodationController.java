@@ -60,4 +60,5 @@ public class AccommodationController {
     public ResponseEntity<List<DisplayAccommodationDto>> findAll(@PathVariable boolean isRented) {
         return ResponseEntity.ok(accommodationApplicationService.findAllByRented(isRented));
     }
+
 }
