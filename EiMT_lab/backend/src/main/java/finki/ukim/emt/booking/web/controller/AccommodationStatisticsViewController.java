@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/accommodations/stats")
-@Tag(name = "Accommodation Statistics", description = "Endpoints for viewing aggregated accommodation statistics")
+@Tag(name = "Accommodation Statistics", description = "Endpoints for viewing aggregated accommodation statistics using materialized view")
 public class AccommodationStatisticsViewController {
     private final AccommodationStatisticsViewApplicationService accommodationStatisticsViewApplicationService;
 
