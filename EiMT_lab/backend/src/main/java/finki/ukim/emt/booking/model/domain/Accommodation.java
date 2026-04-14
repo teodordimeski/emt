@@ -14,6 +14,20 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @NoArgsConstructor
 @Table(name = "accommodations")
+@NamedEntityGraph(
+    name = "accommodation-entity-graph",
+    attributeNodes = {
+        @NamedAttributeNode(value = "host", subgraph = "host-subgraph")
+    },
+    subgraphs = {
+        @NamedSubgraph(
+            name = "host-subgraph",
+            attributeNodes = {
+                @NamedAttributeNode("country")
+            }
+        )
+    }
+)
 public class Accommodation extends BaseAuditableEntity {
     @Column(nullable = false)
     private String name;

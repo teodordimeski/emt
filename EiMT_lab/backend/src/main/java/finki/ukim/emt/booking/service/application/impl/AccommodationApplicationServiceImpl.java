@@ -1,12 +1,17 @@
 package finki.ukim.emt.booking.service.application.impl;
 
+import finki.ukim.emt.booking.model.domain.Country;
 import finki.ukim.emt.booking.model.domain.Host;
 import finki.ukim.emt.booking.model.dto.CreateAccommodationDto;
 import finki.ukim.emt.booking.model.dto.DisplayAccommodationDto;
+import finki.ukim.emt.booking.model.enums.Category;
 import finki.ukim.emt.booking.model.exception.ResourceNotFoundException;
+import finki.ukim.emt.booking.model.projection.LongAccommodationProjection;
+import finki.ukim.emt.booking.model.projection.ShortAccommodationProjection;
 import finki.ukim.emt.booking.service.application.AccommodationApplicationService;
 import finki.ukim.emt.booking.service.domain.AccommodationService;
 import finki.ukim.emt.booking.service.domain.HostService;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,6 +65,22 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
     @Override
     public List<DisplayAccommodationDto> findAllByRented(boolean isRented) {
         return DisplayAccommodationDto.from(accommodationService.findAllByRented(isRented));
+    }
+
+    @Override
+    public List<LongAccommodationProjection> findAllLongProjections() {
+        return accommodationService.findAllLongProjections();
+    }
+
+    @Override
+    public List<ShortAccommodationProjection> findAllShortProjections() {
+        return accommodationService.findAllShortProjections();
+    }
+
+    @Override
+    public Page<DisplayAccommodationDto> findAllPaged(Category category, Host host, Country hostCountry, int numRooms, boolean hasFreeRooms, int pageNumber, int pageSize) {
+        return accommodationService.findAllPaged(category, host, hostCountry, numRooms, hasFreeRooms, pageNumber, pageSize)
+                .map(DisplayAccommodationDto::from);
     }
 
 }
