@@ -47,7 +47,7 @@ public class HostApplicationServiceImpl implements HostApplicationService {
     }
 
     @Override
-    public Optional<DisplayHostDto> delete(Long id) {
-        return hostService.delete(id).map(DisplayHostDto::from);
+    public Optional<DisplayHostDto> deleteById(Long id) {
+        return hostService.deleteById(id).map(DisplayHostDto::from);
     }
 }

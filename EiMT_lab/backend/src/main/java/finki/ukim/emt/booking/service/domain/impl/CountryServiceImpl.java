@@ -38,7 +38,7 @@ public class CountryServiceImpl implements CountryService {
                 .map((existingCountry) -> {
                     existingCountry.setName(country.getName());
                     existingCountry.setContinent(country.getContinent());
-                    return countryRepository.save(country);
+                    return countryRepository.save(existingCountry);
                 });
     }
 

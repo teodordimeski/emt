@@ -44,7 +44,7 @@ public class HostServiceImpl implements HostService {
     }
 
     @Override
-    public Optional<Host> delete(Long id) {
+    public Optional<Host> deleteById(Long id) {
         Optional<Host> host = hostRepository.findById(id);
         host.ifPresent(hostRepository::delete);
         return host;

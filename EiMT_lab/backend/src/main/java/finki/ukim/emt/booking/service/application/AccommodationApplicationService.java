@@ -1,36 +1,38 @@
 package finki.ukim.emt.booking.service.application;
 
-import finki.ukim.emt.booking.model.domain.Country;
-import finki.ukim.emt.booking.model.domain.Host;
 import finki.ukim.emt.booking.model.dto.CreateAccommodationDto;
 import finki.ukim.emt.booking.model.dto.DisplayAccommodationDto;
 import finki.ukim.emt.booking.model.enums.Category;
 import finki.ukim.emt.booking.model.projection.LongAccommodationProjection;
 import finki.ukim.emt.booking.model.projection.ShortAccommodationProjection;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AccommodationApplicationService {
+    DisplayAccommodationDto findById(Long id);
+
+    DisplayAccommodationDto findWithHostAndCountryById(Long id);
+
     List<DisplayAccommodationDto> findAll();
 
-    Optional<DisplayAccommodationDto> findById(Long id);
+    Page<DisplayAccommodationDto> findAllWithFilters(Category category, Long hostId,
+                                                     String countryName, Integer minRooms,
+                                                     Boolean hasAvailableRooms, Pageable pageable);
+
+    Page<ShortAccommodationProjection> findAllShortProjections(Pageable pageable);
 
     DisplayAccommodationDto create(CreateAccommodationDto createAccommodationDto);
 
     Optional<DisplayAccommodationDto> update(Long id, CreateAccommodationDto createAccommodationDto);
 
-    Optional<DisplayAccommodationDto> delete(Long id);
+    Optional<DisplayAccommodationDto> deleteById(Long id);
 
-    DisplayAccommodationDto rent(Long id);
-
-    List<DisplayAccommodationDto> findAllByRented(boolean isRented);
+    Optional<DisplayAccommodationDto> markAsRented(Long id);
 
     List<LongAccommodationProjection> findAllLongProjections();
 
-    List<ShortAccommodationProjection> findAllShortProjections();
-
-    Page<DisplayAccommodationDto> findAllPaged(Category category, Host host, Country hostCountry, int numRooms, boolean hasFreeRooms, int pageNumber, int pageSize);
 
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/accommodations/view")
+@RequestMapping("/api/accommodations/summary")
 @Tag(name = "Accommodation Views", description = "Endpoints for viewing accommodation information through database views")
 public class AccommodationInfoViewController {
     private final AccommodationInfoViewApplicationService accommodationInfoViewApplicationService;

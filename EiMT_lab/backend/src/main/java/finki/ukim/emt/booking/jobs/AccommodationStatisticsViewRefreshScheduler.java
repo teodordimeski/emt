@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 public class AccommodationStatisticsViewRefreshScheduler {
     private final AccommodationStatisticsViewRepository accommodationStatisticsViewRepository;
 
-    public AccommodationStatisticsViewRefreshScheduler(AccommodationStatisticsViewRepository accommodationStatisticsViewRepository) {
+    public AccommodationStatisticsViewRefreshScheduler(
+            AccommodationStatisticsViewRepository accommodationStatisticsViewRepository) {
         this.accommodationStatisticsViewRepository = accommodationStatisticsViewRepository;
     }
 
@@ -19,12 +20,7 @@ public class AccommodationStatisticsViewRefreshScheduler {
     @Transactional
     public void refreshAccommodationStatisticsView() {
         log.info("Refreshing ACCOMMODATION_STATISTICS_VIEW...");
-        try {
-            accommodationStatisticsViewRepository.refresh();
-            log.info("ACCOMMODATION_STATISTICS_VIEW successfully refreshed.");
-        } catch (Exception e) {
-            log.error("Error refreshing ACCOMMODATION_STATISTICS_VIEW", e);
-        }
+        accommodationStatisticsViewRepository.refresh();
+        log.info("ACCOMMODATION_STATISTICS_VIEW successfully refreshed.");
     }
 }
-

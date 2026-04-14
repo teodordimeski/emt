@@ -1,20 +1,18 @@
 package finki.ukim.emt.booking.model.dto;
 
 import finki.ukim.emt.booking.model.views.AccommodationStatisticsView;
-import finki.ukim.emt.booking.model.enums.Category;
-
 import java.math.BigDecimal;
 import java.util.List;
 
 public record DisplayAccommodationStatisticsDto(
-    Category category,
+    String category,
     Long totalAccommodations,
     Long totalRooms,
-    BigDecimal avgRoomsPerAccommodation
+    BigDecimal averageRooms
 ) {
     public static DisplayAccommodationStatisticsDto from(AccommodationStatisticsView view) {
         return new DisplayAccommodationStatisticsDto(
-            view.getCategory(),
+            view.getCategory().name(),
             view.getTotalAccommodations(),
             view.getTotalRooms(),
             view.getAvgRoomsPerAccommodation()

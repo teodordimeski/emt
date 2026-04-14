@@ -15,5 +15,5 @@ public interface HostApplicationService {
 
     Optional<DisplayHostDto> update(Long id, CreateHostDto createHostDto);
 
-    Optional<DisplayHostDto> delete(Long id);
+    Optional<DisplayHostDto> deleteById(Long id);
 }

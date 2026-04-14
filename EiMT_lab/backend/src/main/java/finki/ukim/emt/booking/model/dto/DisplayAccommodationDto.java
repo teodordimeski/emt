@@ -10,8 +10,9 @@ public record DisplayAccommodationDto(
     Long id,
     String name,
     Category category,
-    Long host_id,
     Condition condition,
+    Long hostId,
+    String hostFullName,
     Integer numRooms,
     Boolean rented
 ) {
@@ -20,8 +21,9 @@ public record DisplayAccommodationDto(
             accommodation.getId(),
             accommodation.getName(),
             accommodation.getCategory(),
-            accommodation.getHost().getId(),
             accommodation.getCondition(),
+            accommodation.getHost().getId(),
+            accommodation.getHost().getName() + " " + accommodation.getHost().getSurname(),
             accommodation.getNumRooms(),
             accommodation.getRented()
         );

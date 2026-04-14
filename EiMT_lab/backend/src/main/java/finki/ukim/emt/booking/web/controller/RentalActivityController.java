@@ -1,6 +1,8 @@
 package finki.ukim.emt.booking.web.controller;
 
 import finki.ukim.emt.booking.model.dto.DisplayRentalActivityDto;
+import finki.ukim.emt.booking.model.dto.PopularAccommodationDto;
+import finki.ukim.emt.booking.model.dto.PopularHostDto;
 import finki.ukim.emt.booking.service.application.RentalActivityApplicationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -13,7 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/rental-activities")
+@RequestMapping("/api/activity-log")
 @Tag(name = "Rental Activities", description = "Endpoints for managing and viewing rental activity logs")
 public class RentalActivityController {
     private final RentalActivityApplicationService rentalActivityApplicationService;
@@ -45,6 +47,26 @@ public class RentalActivityController {
     ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(direction, "eventTime"));
         return ResponseEntity.ok(rentalActivityApplicationService.findByAccommodationId(accommodationId, pageable));
+    }
+
+    @GetMapping("/most-popular-accommodations")
+    @Operation(summary = "Get most rented accommodations", description = "Rank accommodations by ACCOMMODATION_RENTED activity count")
+    public ResponseEntity<Page<PopularAccommodationDto>> findMostPopularAccommodations(
+            @Parameter(description = "Page number (0-indexed)") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(rentalActivityApplicationService.findMostPopularAccommodations(pageable));
+    }
+
+    @GetMapping("/most-popular-hosts")
+    @Operation(summary = "Get hosts with most rentals", description = "Rank hosts by ACCOMMODATION_RENTED activity count")
+    public ResponseEntity<Page<PopularHostDto>> findMostPopularHosts(
+            @Parameter(description = "Page number (0-indexed)") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Page size") @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(rentalActivityApplicationService.findMostPopularHosts(pageable));
     }
 }
 

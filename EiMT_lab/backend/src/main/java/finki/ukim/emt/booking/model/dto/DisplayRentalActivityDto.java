@@ -7,20 +7,16 @@ import java.util.List;
 
 public record DisplayRentalActivityDto(
     Long id,
-    Long accommodationId,
     String accommodationName,
-    String activityType,
     LocalDateTime eventTime,
-    LocalDateTime createdAt
+    String eventType
 ) {
     public static DisplayRentalActivityDto from(RentalActivity activity) {
         return new DisplayRentalActivityDto(
             activity.getId(),
-            activity.getAccommodation().getId(),
             activity.getAccommodationName(),
-            activity.getActivityType(),
             activity.getEventTime(),
-            activity.getCreatedAt()
+            activity.getActivityType()
         );
     }
 

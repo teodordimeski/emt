@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/hosts")
+@RequestMapping("/api/hosts")
 public class HostController {
     private final HostApplicationService hostApplicationService;
 
@@ -35,7 +35,7 @@ public class HostController {
         return ResponseEntity.ok(hostApplicationService.create(createHostDto));
     }
 
-    @PutMapping("/edit/{id}")
+    @PutMapping("/{id}/edit")
     public ResponseEntity<DisplayHostDto> update(
             @PathVariable Long id,
             @RequestBody @Valid CreateHostDto createHostDto) {
@@ -44,9 +44,9 @@ public class HostController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<DisplayHostDto> delete(@PathVariable Long id) {
-        return hostApplicationService.delete(id)
+    @DeleteMapping("/{id}/delete")
+    public ResponseEntity<DisplayHostDto> deleteById(@PathVariable Long id) {
+        return hostApplicationService.deleteById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

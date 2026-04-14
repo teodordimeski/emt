@@ -14,5 +14,5 @@ public interface HostService {
 
     Optional<Host> update(Long id, Host host);
 
-    Optional<Host> delete(Long id);
+    Optional<Host> deleteById(Long id);
 }
