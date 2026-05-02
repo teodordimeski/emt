@@ -33,8 +33,7 @@ public class JwtWebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
@@ -78,8 +77,7 @@ public class JwtWebSecurityConfig {
                         "/api/user/me"
                     )
                     .authenticated()
-                    .anyRequest()
-                    .hasRole("ADMINISTRATOR")
+                    .anyRequest().authenticated()
             )
             .sessionManagement(sessionManagementConfigurer ->
                 sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
