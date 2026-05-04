@@ -12,14 +12,6 @@
             </PendingDiffInfo>
           </value>
         </entry>
-        <entry key="$PROJECT_DIR$/frontend/src/services/tokenService.ts">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/frontend/src/services/tokenService.ts" />
-              <option name="updatedContent" value="// Store and manage JWT tokens in localStorage&#10;export const tokenService = {&#10;  getToken: () =&gt; localStorage.getItem('token'),&#10;  setToken: (token: string) =&gt; localStorage.setItem('token', token),&#10;  removeToken: () =&gt; localStorage.removeItem('token'),&#10;  isTokenValid: () =&gt; !!localStorage.getItem('token')&#10;};&#10;" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
       </map>
     </option>
   </component>

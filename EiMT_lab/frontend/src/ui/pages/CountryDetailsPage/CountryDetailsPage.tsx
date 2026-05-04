@@ -17,10 +17,8 @@ const CountryDetailsPage = () => {
         <Card>
           <CardContent>
             <Typography variant='h4' gutterBottom>{countryDetails.name}</Typography>
-            <Typography variant='h6' sx={{ mb: 1 }}>Code</Typography>
-            <Typography variant='body1' sx={{ mb: 2 }}>{countryDetails.code}</Typography>
-            <Typography variant='h6' sx={{ mb: 1 }}>Region</Typography>
-            <Typography variant='body1'>{countryDetails.region}</Typography>
+            <Typography variant='h6' sx={{ mb: 1 }}>Continent</Typography>
+            <Typography variant='body1'>{countryDetails.continent}</Typography>
           </CardContent>
         </Card>
       )}

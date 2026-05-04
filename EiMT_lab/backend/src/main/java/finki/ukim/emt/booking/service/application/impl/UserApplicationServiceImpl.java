@@ -1,8 +1,10 @@
 package finki.ukim.emt.booking.service.application.impl;
 
+import java.util.List;
 import java.util.Optional;
 import finki.ukim.emt.booking.helpers.JwtHelper;
 import finki.ukim.emt.booking.model.domain.User;
+import finki.ukim.emt.booking.model.dto.DisplayUserDto;
 import finki.ukim.emt.booking.model.dto.LoginUserRequestDto;
 import finki.ukim.emt.booking.model.dto.LoginUserResponseDto;
 import finki.ukim.emt.booking.model.dto.RegisterUserRequestDto;
@@ -13,12 +15,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserApplicationServiceImpl implements UserApplicationService {
+    // ...existing code...
     private final UserService userService;
     private final JwtHelper jwtHelper;
 
     public UserApplicationServiceImpl(UserService userService, JwtHelper jwtHelper) {
         this.userService = userService;
         this.jwtHelper = jwtHelper;
+    }
+
+    @Override
+    public List<DisplayUserDto> findAll() {
+        return DisplayUserDto.from(userService.findAll());
+    }
+
+    @Override
+    public Optional<DisplayUserDto> findById(Long id) {
+        return userService.findById(id).map(DisplayUserDto::from);
     }
 
     @Override

@@ -1,4 +1,4 @@
-import { Box, Button, Card, CardActions, CardContent, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import { useNavigate } from 'react-router';
 import type { Accommodation } from '../../../../api/types/accommodation';
@@ -14,7 +14,6 @@ const AccommodationCard = ({ accommodation }: AccommodationCardProps) => {
     <Card sx={{ maxWidth: 300 }}>
       <CardContent>
         <Typography variant='h5'>{accommodation.name}</Typography>
-        <Typography variant='subtitle1' sx={{ mb: 1 }}>{accommodation.description}</Typography>
         <Typography variant='body2' sx={{ textAlign: 'left' }}>Category: {accommodation.category}</Typography>
         <Typography variant='body2' sx={{ textAlign: 'left' }}>Condition: {accommodation.condition}</Typography>
         <Typography variant='body2' sx={{ textAlign: 'left' }}>Rooms: {accommodation.numRooms}</Typography>

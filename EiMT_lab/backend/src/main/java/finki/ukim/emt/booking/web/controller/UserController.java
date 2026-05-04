@@ -1,6 +1,7 @@
 package finki.ukim.emt.booking.web.controller;
 
 import finki.ukim.emt.booking.model.domain.User;
+import finki.ukim.emt.booking.model.dto.DisplayUserDto;
 import finki.ukim.emt.booking.model.dto.LoginUserRequestDto;
 import finki.ukim.emt.booking.model.dto.LoginUserResponseDto;
 import finki.ukim.emt.booking.model.dto.RegisterUserRequestDto;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 public class UserController {
     private final UserApplicationService userApplicationService;
 
@@ -24,20 +27,17 @@ public class UserController {
         this.userApplicationService = userApplicationService;
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<RegisterUserResponseDto> findByUsername(@PathVariable String username) {
-        return userApplicationService
-            .findByUsername(username)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    @GetMapping
+    public ResponseEntity<List<DisplayUserDto>> findAll() {
+        return ResponseEntity.ok(userApplicationService.findAll());
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<RegisterUserResponseDto> me(@AuthenticationPrincipal User user) {
+    @GetMapping("/{id}")
+    public ResponseEntity<DisplayUserDto> findById(@PathVariable Long id) {
         return userApplicationService
-            .findByUsername(user.getUsername())
+            .findById(id)
             .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.badRequest().build());
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping("/register")
@@ -52,6 +52,14 @@ public class UserController {
     public ResponseEntity<LoginUserResponseDto> login(@RequestBody LoginUserRequestDto loginUserRequestDto) {
         return userApplicationService
             .login(loginUserRequestDto)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.badRequest().build());
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<RegisterUserResponseDto> me(@AuthenticationPrincipal User user) {
+        return userApplicationService
+            .findByUsername(user.getUsername())
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.badRequest().build());
     }

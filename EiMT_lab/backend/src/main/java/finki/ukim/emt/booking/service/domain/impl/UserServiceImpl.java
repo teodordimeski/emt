@@ -1,5 +1,6 @@
 package finki.ukim.emt.booking.service.domain.impl;
 
+import java.util.List;
 import java.util.Optional;
 import finki.ukim.emt.booking.model.domain.User;
 import finki.ukim.emt.booking.model.exception.IncorrectPasswordException;
@@ -20,6 +21,16 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
     @Override

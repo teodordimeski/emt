@@ -1,49 +1,53 @@
 import { useParams } from 'react-router';
 import useAccommodationDetails from '../../../hooks/useAccommodationDetails';
-import { Box, Container, Typography, CircularProgress, Grid, Card, CardContent } from '@mui/material';
+import { Alert, Box, Container, Typography, CircularProgress, Card, CardContent } from '@mui/material';
 
 const AccommodationDetailsPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { accommodationDetails, loading } = useAccommodationDetails(id);
+  const { accommodationDetails, loading, error } = useAccommodationDetails(id);
+
+  const getRentedStatus = (rented: boolean) => {
+    return rented ? '✅ Rented' : '❌ Available';
+  };
 
   return (
-    <Container maxWidth='lg' sx={{ mt: 3, py: 3 }}>
+    <Container maxWidth='sm' sx={{ mt: 3, py: 3 }}>
       {loading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 300 }}>
           <CircularProgress/>
         </Box>
       )}
+      {!loading && error && (
+        <Alert severity='error'>
+          Failed to load accommodation details: {error.message}
+        </Alert>
+      )}
+      {!loading && !accommodationDetails && !error && (
+        <Alert severity='info'>
+          No accommodation details found.
+        </Alert>
+      )}
       {!loading && accommodationDetails && (
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={8}>
-            <Card>
-              <CardContent>
-                <Typography variant='h4' gutterBottom>{accommodationDetails.name}</Typography>
-                <Typography variant='body1' sx={{ mb: 2 }}>{accommodationDetails.description}</Typography>
-                <Typography variant='h6'>Price per Night: ${accommodationDetails.pricePerNight}</Typography>
-                <Typography variant='h6'>Max Guests: {accommodationDetails.maxGuests}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-              <CardContent>
-                <Typography variant='h6' gutterBottom>Host Information</Typography>
-                <Typography variant='body2'>Name: {accommodationDetails.host.name}</Typography>
-                <Typography variant='body2'>Email: {accommodationDetails.host.email}</Typography>
-                <Typography variant='body2'>Phone: {accommodationDetails.host.phoneNumber}</Typography>
-              </CardContent>
-            </Card>
-            <Card sx={{ mt: 2 }}>
-              <CardContent>
-                <Typography variant='h6' gutterBottom>Country</Typography>
-                <Typography variant='body2'>Name: {accommodationDetails.country.name}</Typography>
-                <Typography variant='body2'>Code: {accommodationDetails.country.code}</Typography>
-                <Typography variant='body2'>Region: {accommodationDetails.country.region}</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
+        <Card>
+          <CardContent>
+            <Typography variant='h4' gutterBottom>{accommodationDetails.name}</Typography>
+            
+            <Typography variant='h6' sx={{ mb: 1 }}>Category</Typography>
+            <Typography variant='body1' sx={{ mb: 2 }}>{accommodationDetails.category}</Typography>
+            
+            <Typography variant='h6' sx={{ mb: 1 }}>Condition</Typography>
+            <Typography variant='body1' sx={{ mb: 2 }}>{accommodationDetails.condition}</Typography>
+            
+            <Typography variant='h6' sx={{ mb: 1 }}>Number of Rooms</Typography>
+            <Typography variant='body1' sx={{ mb: 2 }}>{accommodationDetails.numRooms}</Typography>
+            
+            <Typography variant='h6' sx={{ mb: 1 }}>Host</Typography>
+            <Typography variant='body1' sx={{ mb: 2 }}>{accommodationDetails.hostFullName}</Typography>
+            
+            <Typography variant='h6' sx={{ mb: 1 }}>Status</Typography>
+            <Typography variant='body1'>{getRentedStatus(accommodationDetails.rented)}</Typography>
+          </CardContent>
+        </Card>
       )}
     </Container>
   );

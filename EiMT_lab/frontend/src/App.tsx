@@ -5,9 +5,11 @@ import HomePage from './ui/pages/HomePage/HomePage.tsx';
 import AccommodationsPage from './ui/pages/AccommodationsPage/AccommodationsPage.tsx';
 import HostsPage from './ui/pages/HostsPage/HostsPage.tsx';
 import CountriesPage from './ui/pages/CountriesPage/CountriesPage.tsx';
+import UsersPage from './ui/pages/UsersPage/UsersPage.tsx';
 import AccommodationDetailsPage from './ui/pages/AccommodationDetailsPage/AccommodationDetailsPage.tsx';
 import HostDetailsPage from './ui/pages/HostDetailsPage/HostDetailsPage.tsx';
 import CountryDetailsPage from './ui/pages/CountryDetailsPage/CountryDetailsPage.tsx';
+import UserDetailsPage from './ui/pages/UserDetailsPage/UserDetailsPage.tsx';
 import LoginPage from './ui/pages/LoginPage/LoginPage.tsx';
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path='hosts/:id' element={<HostDetailsPage/>}/>
           <Route path='countries' element={<CountriesPage/>}/>
           <Route path='countries/:id' element={<CountryDetailsPage/>}/>
+          <Route path='users' element={<UsersPage/>}/>
+          <Route path='users/:id' element={<UserDetailsPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
