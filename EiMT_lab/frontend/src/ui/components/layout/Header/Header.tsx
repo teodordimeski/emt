@@ -40,7 +40,7 @@ const Header = () => {
           </IconButton>
 
           <Typography variant='h6' component='div' sx={{ mr: 3 }}>
-            🏨 ACCOMMODATIONS
+             ACCOMMODATIONS
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
