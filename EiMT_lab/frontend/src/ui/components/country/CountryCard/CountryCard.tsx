@@ -14,8 +14,7 @@ const CountryCard = ({ country }: CountryCardProps) => {
     <Card sx={{ maxWidth: 300 }}>
       <CardContent>
         <Typography variant='h5'>{country.name}</Typography>
-        <Typography variant='subtitle1' sx={{ mb: 1 }}>Code: {country.code}</Typography>
-        <Typography variant='body2' sx={{ textAlign: 'left' }}>Region: {country.region}</Typography>
+        <Typography variant='body2' sx={{ textAlign: 'left' }}>Continent: {country.continent}</Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'flex-start' }}>
         <Button

@@ -5,8 +5,9 @@ export interface Accommodation {
   id: number;
   name: string;
   description: string;
-  pricePerNight: number;
-  maxGuests: number;
+  category: string;
+  condition: string;
+  numRooms: number;
 }
 
 export interface AccommodationDetails {
