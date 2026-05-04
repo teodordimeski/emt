@@ -9,13 +9,12 @@ import AccommodationDetailsPage from './ui/pages/AccommodationDetailsPage/Accomm
 import HostDetailsPage from './ui/pages/HostDetailsPage/HostDetailsPage.tsx';
 import CountryDetailsPage from './ui/pages/CountryDetailsPage/CountryDetailsPage.tsx';
 import LoginPage from './ui/pages/LoginPage/LoginPage.tsx';
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
         <Route path='/' element={<Layout/>}>
+        <Route path="/login" element={<LoginPage />} />
           <Route index element={<HomePage/>}/>
           <Route path='accommodations' element={<AccommodationsPage/>}/>
           <Route path='accommodations/:id' element={<AccommodationDetailsPage/>}/>
@@ -30,3 +29,4 @@ function App() {
 }
 
 export default App;
+
