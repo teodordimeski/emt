@@ -4,3 +4,7 @@ export interface Country {
   continent: string;
 }
 
+export interface CreateCountryRequest {
+  name: string;
+  continent: string;
+}

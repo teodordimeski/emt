@@ -1,7 +1,12 @@
 export interface Host {
   id: number;
   name: string;
-  email: string;
-  phoneNumber: string;
+  surname: string;
+  country_id: number;
 }
 
+export interface CreateHostRequest {
+  name: string;
+  surname: string;
+  countryId: number;
+}

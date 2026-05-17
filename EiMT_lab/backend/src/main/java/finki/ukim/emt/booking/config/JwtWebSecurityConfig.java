@@ -69,12 +69,12 @@ public class JwtWebSecurityConfig {
                     .requestMatchers(
                         "/swagger-ui/**",
                         "/v3/api-docs/**",
-                        "/api/user/register",
-                        "/api/user/login"
+                        "/api/users/register",
+                        "/api/users/login"
                     )
                     .permitAll()
                     .requestMatchers(
-                        "/api/user/me"
+                        "/api/users/me"
                     )
                     .authenticated()
                     .anyRequest().authenticated()

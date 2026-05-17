@@ -16,11 +16,9 @@ const HostDetailsPage = () => {
       {!loading && hostDetails && (
         <Card>
           <CardContent>
-            <Typography variant='h4' gutterBottom>{hostDetails.name}</Typography>
-            <Typography variant='h6' sx={{ mb: 1 }}>Email</Typography>
-            <Typography variant='body1' sx={{ mb: 2 }}>{hostDetails.email}</Typography>
-            <Typography variant='h6' sx={{ mb: 1 }}>Phone Number</Typography>
-            <Typography variant='body1'>{hostDetails.phoneNumber}</Typography>
+            <Typography variant='h4' gutterBottom>{hostDetails.name} {hostDetails.surname}</Typography>
+            <Typography variant='h6' sx={{ mb: 1 }}>Country ID</Typography>
+            <Typography variant='body1'>{hostDetails.country_id}</Typography>
           </CardContent>
         </Card>
       )}
@@ -29,4 +27,3 @@ const HostDetailsPage = () => {
 };
 
 export default HostDetailsPage;
-

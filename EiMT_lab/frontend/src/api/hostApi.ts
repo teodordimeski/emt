@@ -1,5 +1,5 @@
 import axiosInstance from '../axios/axios';
-import type { Host } from './types/host';
+import type { CreateHostRequest, Host } from './types/host';
 
 const hostApi = {
   findAll: async () => {
@@ -7,8 +7,16 @@ const hostApi = {
   },
   findById: async (id: string) => {
     return await axiosInstance.get<Host>(`/hosts/${id}`);
+  },
+  add: async (data: CreateHostRequest) => {
+    return await axiosInstance.post<Host>('/hosts/add', data);
+  },
+  edit: async (id: string, data: CreateHostRequest) => {
+    return await axiosInstance.put<Host>(`/hosts/${id}/edit`, data);
+  },
+  delete: async (id: string) => {
+    return await axiosInstance.delete<Host>(`/hosts/${id}/delete`);
   }
 };
 
 export default hostApi;
-

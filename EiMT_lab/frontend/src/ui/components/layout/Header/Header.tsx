@@ -5,29 +5,26 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router';
 import { useState } from 'react';
-import { tokenService } from '../../../../services/tokenService';
+import AuthToggle from '../../auth/AuthToggle/AuthToggle';
+import useAuth from '../../../../hooks/useAuth';
 
 const pages = [
-  { path: '/', name: 'Home' },
-  { path: '/accommodations', name: 'Accommodations' },
-  { path: '/hosts', name: 'Hosts' },
-  { path: '/countries', name: 'Countries' },
-  { path: '/users', name: 'Users' }
+  { path: '/', name: 'Home', authenticated: false },
+  { path: '/accommodations', name: 'Accommodations', authenticated: true },
+  { path: '/hosts', name: 'Hosts', authenticated: true },
+  { path: '/countries', name: 'Countries', authenticated: true }
 ];
 
 const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const isLoggedIn = tokenService.isTokenValid();
+  const { isLoggedIn } = useAuth();
 
-  const handleLogout = () => {
-    tokenService.removeToken();
-    window.location.href = '/login';
-  };
+  const visiblePages = pages.filter((page) => !page.authenticated || isLoggedIn);
 
   return (
     <Box>
       <AppBar position='static'>
-        <Toolbar>
+        <Toolbar sx={{ display: 'flex' }}>
           <IconButton
             size='large'
             edge='start'
@@ -44,7 +41,7 @@ const Header = () => {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {visiblePages.map((page) => (
               <Link key={page.name} to={page.path} style={{ textDecoration: 'none' }}>
                 <Button className='header-button' sx={{ my: 2, color: 'white', display: 'block' }}>
                   {page.name}
@@ -53,24 +50,16 @@ const Header = () => {
             ))}
           </Box>
 
-          {isLoggedIn ? (
-            <Button color='inherit' onClick={handleLogout} sx={{ ml: 'auto' }}>
-              Logout
-            </Button>
-          ) : (
-            <Link to='/login' style={{ textDecoration: 'none' }}>
-              <Button color='inherit' sx={{ ml: 'auto' }}>
-                Login
-              </Button>
-            </Link>
-          )}
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
+            <AuthToggle/>
+          </Box>
         </Toolbar>
       </AppBar>
 
       <Drawer anchor='left' open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <Box sx={{ width: 240 }} role='presentation' onClick={() => setDrawerOpen(false)}>
           <List>
-            {pages.map((page) => (
+            {visiblePages.map((page) => (
               <ListItem key={page.name} disablePadding>
                 <ListItemButton component={Link} to={page.path}>
                   <ListItemText primary={page.name}/>

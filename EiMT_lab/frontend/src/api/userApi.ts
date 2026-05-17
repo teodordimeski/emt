@@ -1,33 +1,22 @@
 import axiosInstance from '../axios/axios';
-import type { User } from './types/user';
-
-interface LoginResponse {
-    token: string;
-}
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse, User } from './types/user';
 
 const userApi = {
-    findAll: async () => {
-        return await axiosInstance.get<User[]>('/users');
-    },
+  findAll: async () => {
+    return await axiosInstance.get<User[]>('/users');
+  },
 
-    findById: async (id: string) => {
-        return await axiosInstance.get<User>(`/users/${id}`);
-    },
+  findById: async (id: string) => {
+    return await axiosInstance.get<User>(`/users/${id}`);
+  },
 
-    login: async (username: string, password: string) => {
-        const response = await axiosInstance.post<LoginResponse>('/users/login', {
-            username,
-            password
-        });
-        return response.data.token;
-    },
+  login: async (data: LoginRequest) => {
+    return await axiosInstance.post<LoginResponse>('/users/login', data);
+  },
 
-    register: async (username: string, password: string) => {
-        return await axiosInstance.post('/users/register', {
-            username,
-            password
-        });
-    }
+  register: async (data: RegisterRequest) => {
+    return await axiosInstance.post<RegisterResponse>('/users/register', data);
+  }
 };
 
 export default userApi;
